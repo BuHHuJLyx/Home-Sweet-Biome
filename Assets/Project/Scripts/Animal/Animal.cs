@@ -18,13 +18,21 @@ public class Animal : MonoBehaviour
         _mover = GetComponent<AnimalMover>();
     }
 
-    public void Initialize(Biome biome)
+    public void Initialize(MovementPath path)
+    {
+        _mover.Initialize(path);
+    }
+
+    public void StartMoving()
+    {
+        _mover.StartMoving();
+    }
+
+    public void SetCurrentBiome(Biome biome)
     {
         _currentBiome = biome;
     }
 
-    public List<Animal> GetGroup()
-    {
-        return _currentBiome.GetAnimalGroup(this);
-    }
+    public List<Animal> GetGroup() 
+        => _currentBiome.GetAnimalGroup(this);
 }

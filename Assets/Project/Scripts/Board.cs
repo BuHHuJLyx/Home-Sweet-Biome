@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ public class Board : MonoBehaviour
     {
         _biomes.Clear();
 
-        Biome[] levelBiomes = GetComponents<Biome>();
+        Biome[] levelBiomes = GetComponentsInChildren<Biome>();
 
         foreach (Biome biome in levelBiomes)
         {
@@ -22,13 +23,28 @@ public class Board : MonoBehaviour
         foreach (LevelData.BiomeSetup biomeSetup in biomeSetups)
         {
             if (_biomes.TryGetValue(biomeSetup.Biome, out Biome biome))
+            {
                 foreach (AnimalData animal in biomeSetup.Animals)
-                    CreateAnimal(animal, biome);                
+                    CreateAnimal(animal, biome);
+
+                biome.RefreshSlots();
+            }
         }
     }
 
-    private void CreateAnimal(AnimalData animal, Biome value)
+    private void CreateAnimal(AnimalData animalData, Biome biome)
     {
-        throw new System.NotImplementedException();
+        if (animalData.Prefab == null)
+            throw new ArgumentNullException(nameof(animalData.Prefab));
+
+        GameObject animalObject = Instantiate(animalData.Prefab);
+
+        Animal animal = animalObject.GetComponent<Animal>();
+
+        if (animal != null)
+        {
+            animal.SetCurrentBiome(biome);
+            biome.AddAnimal(animal);
+        }
     }
 }

@@ -11,20 +11,19 @@ public class Biome : MonoBehaviour
     public BiomeData Data => _data;
     public IReadOnlyList<Animal> Animals => _animals;
     public int Capacity => _data.Capacity;
+    public int FreeSlots => _data.Capacity - _animals.Count;
 
     public void AddAnimal(Animal animal)
     {
+        if (_animals.Count >= _data.Capacity)
+            return;
+        
         _animals.Add(animal);
     }
 
     public void RemoveAnimal(Animal animal)
     {
         _animals.Remove(animal);
-    }
-
-    public List<Animal> GetAnimals()
-    {
-        return _animals;
     }
 
     public void RefreshSlots()
