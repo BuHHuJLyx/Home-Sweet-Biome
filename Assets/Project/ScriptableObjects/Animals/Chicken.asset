@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: Chicken
   m_EditorClassIdentifier: 
   _prefab: {fileID: 0}
-  _targetBiome: {fileID: 0}
+  _targetBiome: {fileID: 11400000, guid: 4cad62a0304ed1346b1e74f9e12be08e, type: 2}
+  _allowedBiomes:
+  - {fileID: 11400000, guid: 4cad62a0304ed1346b1e74f9e12be08e, type: 2}
+  - {fileID: 11400000, guid: 9be321f8fc93c234c918f23f0e856574, type: 2}

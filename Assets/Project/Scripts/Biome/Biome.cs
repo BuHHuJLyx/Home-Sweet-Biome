@@ -4,12 +4,20 @@ using UnityEngine;
 public class Biome : MonoBehaviour
 {
     [SerializeField] private BiomeData _data;
+    
     [SerializeField] private Transform[] _slots;
-
+    [SerializeField] private Transform _entrancePoint;
+    [SerializeField] private Transform _exitPoint;
+    
     private readonly List<Animal> _animals = new();
 
     public BiomeData Data => _data;
     public IReadOnlyList<Animal> Animals => _animals;
+    
+    public Transform[] Slots => _slots;
+    public Transform EntrancePoint => _entrancePoint;
+    public Transform ExitPoint => _exitPoint;
+    
     public int Capacity => _data.Capacity;
     public int FreeSlots => _data.Capacity - _animals.Count;
 
@@ -18,7 +26,11 @@ public class Biome : MonoBehaviour
         if (_animals.Count >= _data.Capacity)
             return;
         
+        if (_animals.Contains(animal))
+            return;
+        
         _animals.Add(animal);
+        animal.SetCurrentBiome(this);
     }
 
     public void RemoveAnimal(Animal animal)

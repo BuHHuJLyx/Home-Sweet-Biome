@@ -12,6 +12,7 @@ public class Animal : MonoBehaviour
 
     public AnimalData Data => _data;
     public Biome CurrentBiome => _currentBiome;
+    public bool IsMoving => _mover.IsMoving;
 
     private void Awake()
     {
@@ -23,9 +24,9 @@ public class Animal : MonoBehaviour
         _mover.Initialize(path);
     }
 
-    public void StartMoving()
+    public void StartMoving(Vector3 startPosition, Vector3 exitPosition, Vector3 entrancePosition, Vector3 targetPosition)
     {
-        _mover.StartMoving();
+        _mover.StartMoving(startPosition, exitPosition, entrancePosition, targetPosition);
     }
 
     public void SetCurrentBiome(Biome biome)

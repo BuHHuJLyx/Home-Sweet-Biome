@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33111128ec7a496408511edc9a9c8fbf, type: 3}
   m_Name: Tiger
   m_EditorClassIdentifier: 
-  _name: 
   _prefab: {fileID: 0}
-  _targetBiome: {fileID: 0}
+  _targetBiome: {fileID: 11400000, guid: b2a73b60de1250c4ebd88fe24ac2187c, type: 2}
+  _allowedBiomes:
+  - {fileID: 11400000, guid: b2a73b60de1250c4ebd88fe24ac2187c, type: 2}
+  - {fileID: 11400000, guid: 9be321f8fc93c234c918f23f0e856574, type: 2}

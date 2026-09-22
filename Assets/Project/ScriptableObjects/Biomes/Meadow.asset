@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab666e42bae7d4b4aa61fc155b1ddc26, type: 3}
   m_Name: Meadow
   m_EditorClassIdentifier: 
-  _capacity: 0
-  _isBuffer: 0
+  _capacity: 5

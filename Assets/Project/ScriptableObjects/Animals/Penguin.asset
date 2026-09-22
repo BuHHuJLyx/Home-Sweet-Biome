@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: Penguin
   m_EditorClassIdentifier: 
   _prefab: {fileID: 0}
-  _targetBiome: {fileID: 0}
+  _targetBiome: {fileID: 11400000, guid: 873a0d031662e0441a8d4cfe4b1d4697, type: 2}
+  _allowedBiomes:
+  - {fileID: 11400000, guid: 873a0d031662e0441a8d4cfe4b1d4697, type: 2}
+  - {fileID: 11400000, guid: 9be321f8fc93c234c918f23f0e856574, type: 2}

@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: Deer
   m_EditorClassIdentifier: 
   _prefab: {fileID: 0}
-  _targetBiome: {fileID: 0}
+  _targetBiome: {fileID: 11400000, guid: 6b8a5e91787984b43861b745c8dd4440, type: 2}
+  _allowedBiomes:
+  - {fileID: 11400000, guid: 6b8a5e91787984b43861b745c8dd4440, type: 2}
+  - {fileID: 11400000, guid: 9be321f8fc93c234c918f23f0e856574, type: 2}
