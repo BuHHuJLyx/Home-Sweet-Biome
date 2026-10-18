@@ -6,19 +6,17 @@ public class Mover : MonoBehaviour
 {
     private readonly MoveValidator _validator = new();
 
-    private bool _isMovingGroup;
-
     private WaitForSeconds _delay;
 
     private void Awake()
     {
-        _delay = new WaitForSeconds(0.5f);
+        _delay = new WaitForSeconds(0.1f);
     }
 
     public void Move(Animal animal, Biome targetBiome)
     {
-        if (_isMovingGroup)
-            return;
+        if (animal.IsMoving)
+            return;;
 
         Biome currentBiome = animal.CurrentBiome;
 
@@ -37,8 +35,6 @@ public class Mover : MonoBehaviour
 
     private IEnumerator MoveGroup(List<Animal> group, Biome currentBiome, Biome targetBiome)
     {
-        _isMovingGroup = true;
-
         foreach (Animal animal in group)
             currentBiome.RemoveAnimal(animal);
 
@@ -75,6 +71,5 @@ public class Mover : MonoBehaviour
         }
 
         targetBiome.RefreshSlots();
-        _isMovingGroup = false;
     }
 }

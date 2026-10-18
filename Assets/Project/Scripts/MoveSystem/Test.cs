@@ -17,7 +17,7 @@ public class Test : MonoBehaviour
             _currentBiome.AddAnimal(animal);
         }
 
-        _currentBiome.RefreshSlots();
+        _currentBiome.RefreshSlots(true);
     }
 
     private void Update()

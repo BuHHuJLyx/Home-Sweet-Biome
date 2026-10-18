@@ -9,17 +9,27 @@ public class AnimalMover : MonoBehaviour
     private Vector3 _exitPosition;
     private Vector3 _entrancePosition;
     private Vector3 _targetPosition;
+    private Vector3 _slotTarget;
 
     private int _currentPoint;
     private int _entrancePoint;
 
     private bool _isMoving;
+    private bool _isMovingToSlot;
+    
     private MoveStage _moveStage;
     
-    public bool IsMoving => _isMoving;
+    public bool IsMoving => _isMoving || _isMovingToSlot;
+    public bool IsMovingAlongPath => _isMoving;
 
     private void Update()
     {
+        if (_isMovingToSlot)
+        {
+            MoveToSlot();
+            return;
+        }
+
         if (_isMoving == false)
             return;
 
@@ -45,6 +55,12 @@ public class AnimalMover : MonoBehaviour
         
         _moveStage = MoveStage.ToExit;
         _isMoving = true;
+    }
+    
+    public void StartSlotMoving(Vector3 targetPosition)
+    {
+        _slotTarget = targetPosition;
+        _isMovingToSlot = true;
     }
 
     private void Move()
@@ -73,6 +89,14 @@ public class AnimalMover : MonoBehaviour
                 _isMoving = false;
                 break;
         }
+    }
+    
+    private void MoveToSlot()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, _slotTarget, _speed * Time.deltaTime);
+
+        if (transform.position == _slotTarget)
+            _isMovingToSlot = false;
     }
     
     private Vector3 GetCurrentTarget()

@@ -38,10 +38,18 @@ public class Biome : MonoBehaviour
         _animals.Remove(animal);
     }
 
-    public void RefreshSlots()
+    public void RefreshSlots(bool instant = false)
     {
         for (int i = 0; i < _animals.Count; i++)
-            _animals[i].transform.position = _slots[i].position;
+        {
+            Animal animal = _animals[i];
+            Vector3 targetPosition = _slots[i].position;
+            
+            if (instant)
+                animal.transform.position = targetPosition;
+            else if (animal.IsMovingAlongPath == false)
+                animal.StartSlotMoving(targetPosition);
+        }
     }
 
     public List<Animal> GetAnimalGroup(Animal animal)
@@ -69,5 +77,18 @@ public class Biome : MonoBehaviour
         }
 
         return group;
+    }
+    
+    public bool CanSelectAnimal(Animal animal)
+    {
+        int index = _animals.IndexOf(animal);
+
+        if (index == -1)
+            return false;
+
+        while (index > 0 && _animals[index - 1].Data == animal.Data)
+            index--;
+
+        return index == 0;
     }
 }
