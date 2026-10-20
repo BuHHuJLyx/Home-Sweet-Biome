@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class Mover : MonoBehaviour
 {
+    [SerializeField] private MoveHistory _moveHistory;
+
     private readonly MoveValidator _validator = new();
 
     private WaitForSeconds _delay;
+    
+    public bool IsMoving { get; private set; }
 
     private void Awake()
     {
@@ -16,7 +20,7 @@ public class Mover : MonoBehaviour
     public void Move(Animal animal, Biome targetBiome)
     {
         if (animal.IsMoving)
-            return;;
+            return;
 
         Biome currentBiome = animal.CurrentBiome;
 
@@ -30,7 +34,11 @@ public class Mover : MonoBehaviour
             return;
 
         if (_validator.CanMoveTo(animal, targetBiome, groupSize))
+        {
+            _moveHistory.SaveState();
+            IsMoving = true;
             StartCoroutine(MoveGroup(group, currentBiome, targetBiome));
+        }
     }
 
     private IEnumerator MoveGroup(List<Animal> group, Biome currentBiome, Biome targetBiome)
@@ -51,7 +59,7 @@ public class Mover : MonoBehaviour
 
             yield return _delay;
         }
-        
+
         bool isGroupMoving = true;
 
         while (isGroupMoving)
@@ -71,5 +79,6 @@ public class Mover : MonoBehaviour
         }
 
         targetBiome.RefreshSlots();
+        IsMoving = false;
     }
 }

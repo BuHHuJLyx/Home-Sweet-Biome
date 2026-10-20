@@ -5,6 +5,7 @@ public class InputReader : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
     [SerializeField] private Mover _mover;
+    [SerializeField] private MoveHistory _moveHistory;
 
     private InputSystem _inputSystem;
     private Animal _selectedAnimal;
@@ -18,6 +19,12 @@ public class InputReader : MonoBehaviour
     {
         _inputSystem.Player.Click.performed += OnClick;
         _inputSystem.Enable();
+    }
+
+    private void Update()
+    {
+        if (Keyboard.current != null && Keyboard.current.zKey.wasPressedThisFrame && _mover.IsMoving == false)
+            _moveHistory.RestoreState();
     }
 
     private void OnDisable()

@@ -91,4 +91,18 @@ public class Biome : MonoBehaviour
 
         return index == 0;
     }
+    
+    
+    public void RestoreAnimals(List<Animal> animals)
+    {
+        _animals.Clear();
+
+        foreach (Animal animal in animals)
+        {
+            _animals.Add(animal);
+            animal.SetCurrentBiome(this);
+        }
+
+        RefreshSlots(true);
+    }
 }

@@ -3,31 +3,25 @@ using UnityEngine;
 public class Test : MonoBehaviour
 {
     [SerializeField] private Animal[] _animals;
-    [SerializeField] private Biome _currentBiome;
-    [SerializeField] private Biome _targetBiome;
+    [SerializeField] private Biome _firstBiome;
+    [SerializeField] private Biome _secondBiome;
     [SerializeField] private MovementPath _path;
-    [SerializeField] private Mover _mover;
 
     private void Start()
     {
-        foreach (Animal animal in _animals)
+        for (int i = 0; i < _animals.Length; i++)
         {
+            Animal animal = _animals[i];
+            
             animal.Initialize(_path);
-
-            _currentBiome.AddAnimal(animal);
+            
+            if (i < 5)
+                _firstBiome.AddAnimal(animal);
+            else
+                _secondBiome.AddAnimal(animal);
         }
 
-        _currentBiome.RefreshSlots(true);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (_animals.Length == 0)
-                return;
-
-            _mover.Move(_animals[0], _targetBiome);
-        }
+        _firstBiome.RefreshSlots(true);
+        _secondBiome.RefreshSlots(true);
     }
 }
