@@ -5,6 +5,7 @@ public class Test : MonoBehaviour
     [SerializeField] private Animal[] _animals;
     [SerializeField] private Biome _firstBiome;
     [SerializeField] private Biome _secondBiome;
+    [SerializeField] private Biome _thirdBiome;
     [SerializeField] private MovementPath _path;
 
     private void Start()
@@ -15,13 +16,16 @@ public class Test : MonoBehaviour
             
             animal.Initialize(_path);
             
-            if (i < 5)
+            if (i < 3)
                 _firstBiome.AddAnimal(animal);
-            else
+            else if (i >= 4 & i < 7)
                 _secondBiome.AddAnimal(animal);
+            else
+                _thirdBiome.AddAnimal(animal);
         }
 
         _firstBiome.RefreshSlots(true);
         _secondBiome.RefreshSlots(true);
+        _thirdBiome.RefreshSlots(true);
     }
 }

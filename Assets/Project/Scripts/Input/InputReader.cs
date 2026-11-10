@@ -52,6 +52,7 @@ public class InputReader : MonoBehaviour
                     return;
                 
                 _selectedAnimal = animal;
+                Debug.Log(_selectedAnimal.name);
                 return;
             }
 
